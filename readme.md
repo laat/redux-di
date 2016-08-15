@@ -42,7 +42,7 @@ function configureStore(initialState) {
 ```js
 const fetchUsersBegin = () => ({ type: 'begin' });
 const fetchUsersSuccess = (users) => ({ type: 'success', users });
-const fetchUsersError = () => ({ type: 'error});
+const fetchUsersError = () => ({ type: 'error'});
 
 export const fetchUsers = () =>
 async ({ dispatch, getState, api }) => {

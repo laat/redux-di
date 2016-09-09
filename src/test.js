@@ -1,3 +1,4 @@
+// @flow
 import sinon from 'sinon';
 import test from 'tape';
 import di from './index.js';

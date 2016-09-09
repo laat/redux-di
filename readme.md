@@ -6,7 +6,7 @@
 
 > Redux thunk middleware with dependency injection.
 
-Simple dependency injection in the middleware creator. The dependency
+Simple dependency injection in the action creator. The dependency
 injection enables easy testable asynchronous action creators.
 
 ## Install

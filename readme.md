@@ -7,7 +7,9 @@
 > Redux thunk middleware with dependency injection.
 
 Simple dependency injection in the action creator. The dependency
-injection enables easy testable asynchronous action creators.
+injection enables easily testable asynchronous action creators.
+
+*NB*: this is an alternative to [redux-thunk](https://github.com/gaearon/redux-thunk).
 
 ## Install
 

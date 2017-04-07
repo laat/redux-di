@@ -1,6 +1,6 @@
 {
   "name": "redux-di",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Redux thunk middleware with dependency injection",
   "keywords": [
     "dependency injection",

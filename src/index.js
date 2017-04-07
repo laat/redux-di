@@ -1,7 +1,7 @@
 // @flow
 type Dispatch = (action: Object | any) => any;
 type State = any;
-type MiddlewareAPI = ({ dispatch: Dispatch, getState: () => State });
+type MiddlewareAPI = { dispatch: Dispatch, getState(): State };
 type Injector = (api: MiddlewareAPI) => { [key: string]: any };
 
 const mergeResults = (...args) => (result, fn) => ({ ...result, ...fn(...args) });

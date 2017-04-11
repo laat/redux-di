@@ -9,7 +9,13 @@
 Simple dependency injection in the action creator. The dependency
 injection enables easily testable asynchronous action creators.
 
-*NB*: this is an alternative to [redux-thunk](https://github.com/gaearon/redux-thunk).
+*NB*:
+This is an alternative to [redux-thunk](https://github.com/gaearon/redux-thunk),
+which already has some of this functionality with the
+[withExtraArgument](https://github.com/gaearon/redux-thunk#injecting-a-custom-argument)
+option for an extra *static* argument. **redux-di** has a *dynamic* argument created
+with *dispatch* and *getState* as parameters which is sometimes convenient.
+
 
 ## Install
 
@@ -18,6 +24,11 @@ $ npm install --save redux-di
 ```
 
 ## Usage
+
+In this example we have an api-client which is created with some token saved in
+the redux state. This is not currently possible with
+[redux-thunk](https://github.com/gaearon/redux-thunk) and is the only
+significant difference in **redux-di**.
 
 ### configure store
 ```js
@@ -31,12 +42,11 @@ const diMiddleware = reduxDI(
   })
 );
 
-function configureStore(initialState) {
-  const enhancer = compose(
-    applyMiddleware(diMiddleware)
-  );
-  return createStore(rootReducer, initialState, enhancer);
-}
+const initialState = {};
+const rootReducer = (state: {}) => state;
+
+const enhancer = compose(applyMiddleware(diMiddleware));
+const store = createStore(rootReducer, initialState, enhancer);
 ```
 
 ### thunks

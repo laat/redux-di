@@ -1,6 +1,6 @@
 {
   "name": "redux-di",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Redux thunk middleware with dependency injection",
   "keywords": ["dependency injection", "di", "redux", "action creator", "laat"],
   "license": "MIT",

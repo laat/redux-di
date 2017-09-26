@@ -2,23 +2,14 @@
   "name": "redux-di",
   "version": "1.0.6",
   "description": "Redux thunk middleware with dependency injection",
-  "keywords": [
-    "dependency injection",
-    "di",
-    "redux",
-    "action creator",
-    "laat"
-  ],
+  "keywords": ["dependency injection", "di", "redux", "action creator", "laat"],
   "license": "MIT",
   "author": {
     "name": "Sigurd Fosseng",
     "email": "sigurd@fosseng.net",
     "url": "https://github.com/laat"
   },
-  "files": [
-    "lib",
-    "*.js"
-  ],
+  "files": ["lib", "*.js"],
   "main": "lib/index.js",
   "repository": "laat/redux-di",
   "scripts": {
@@ -30,7 +21,11 @@
     "test:tape": "tape -r babel-register 'src/**/*test.js'",
     "test": "npm-run-all lint flow test:*",
     "prebuild": "rimraf lib",
+    "precommit": "lint-staged",
     "prepublish": "npm run build"
+  },
+  "lint-staged": {
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -42,10 +37,14 @@
     "babel-register": "^6.24.1",
     "eslint": "^4.7.2",
     "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-import": "^2.2.0",
     "flow-bin": "^0.55.0",
     "flow-copy-source": "^1.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
     "npm-run-all": "^4.0.2",
+    "prettier": "^1.7.0",
     "rimraf": "^2.6.1",
     "sinon": "^3.3.0",
     "tape": "^4.6.3"

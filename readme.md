@@ -44,7 +44,7 @@ const sideEffects = {
   redirect: (href) => { location.href = href; },
 }
 
-const thunkMiddleware = diThunk().withStatic(sideEffects).withDynamic(storeDependent);
+const thunkMiddleware = reduxDI().withStatic(sideEffects).withDynamic(storeDependent);
 
 // configure store
 const initialState = {};

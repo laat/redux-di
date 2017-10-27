@@ -30,6 +30,7 @@ the redux state. This is not currently possible with
 [redux-thunk](https://github.com/gaearon/redux-thunk) and is the only
 significant difference in **redux-di**.
 
+
 ### configure store
 
 ```js
@@ -55,10 +56,6 @@ const store = createStore(rootReducer, initialState, enhancer);
 ### thunks
 
 ```js
-const fetchUsersBegin = () => ({ type: 'begin' });
-const fetchUsersSuccess = (users) => ({ type: 'success', users });
-const fetchUsersError = () => ({ type: 'error'});
-
 // because api and redirect are parameters, they are easily stubbed for testing
 const getUserProfile = (id) => async (dispatch, getState, { api, redirect }) => {
   try {
@@ -77,6 +74,19 @@ const getUserProfile = (id) => async (dispatch, getState, { api, redirect }) => 
 ```js
 dispatch(getUserProfile())
 ```
+
+## Upgrade from v1
+
+Most likely, you do not need to upgrade, but if you do the thunk api has changed.
+
+```js
+// v1 actionCreator.
+const getProfile = (id) => ({ dispatch, getState, extraArg });
+// v2 actionCreator.
+const getProfile = (id) => (dispatch, getState, { extraArg });
+```
+
+Also, the middleware configuration has changed. See examples above
 ## License
 
 MIT © [Sigurd Fosseng](https://github.com/laat)

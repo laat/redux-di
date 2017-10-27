@@ -41,7 +41,7 @@ const storeDependent = {
   api: ({getState}) => initApiClient(getState().apiToken),
 }
 const sideEffects = {
-  redirect: (href) => { location.href = href },
+  redirect: (href) => { location.href = href; },
 }
 
 const thunkMiddleware = diThunk().withStatic(sideEffects).withDynamic(storeDependent);
@@ -81,9 +81,9 @@ Most likely, you do not need to upgrade, but if you do the thunk api has changed
 
 ```js
 // v1 actionCreator.
-const getProfile = (id) => ({ dispatch, getState, extraArg });
+const getProfile = (id) => ({ dispatch, getState, extraArg }) => { /* impl */ };
 // v2 actionCreator.
-const getProfile = (id) => (dispatch, getState, { extraArg });
+const getProfile = (id) => (dispatch, getState, { extraArg }) => { /* impl */ };
 ```
 
 Also, the middleware configuration has changed. See examples above

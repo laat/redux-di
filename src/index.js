@@ -1,9 +1,18 @@
+const entries = obj => {
+  // Object.entries
+  const ownProps = Object.keys(obj);
+  let i = ownProps.length;
+  const resArray = new Array(i); // preallocate the Array
+  while (i--) resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+  return resArray;
+};
 export default () => {
   const staticArgs = {};
   const dynamicArgs = {};
   const middleware = ({ dispatch, getState }) => {
     const extraArgument = { ...staticArgs };
-    Object.entries(dynamicArgs).forEach(([key, callback]) => {
+    entries(dynamicArgs).forEach(([key, callback]) => {
       Object.defineProperty(extraArgument, key, {
         get() {
           return callback({ dispatch, getState });

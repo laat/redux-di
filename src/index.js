@@ -1,21 +1,40 @@
-// @flow
-type Dispatch = (action: Object | any) => any;
-type State = any;
-type MiddlewareAPI = { dispatch: Dispatch, getState(): State };
-type Injector = (api: MiddlewareAPI) => { [key: string]: any };
+const entries = obj => {
+  // Object.entries
+  const ownProps = Object.keys(obj);
+  let i = ownProps.length;
+  const resArray = new Array(i); // preallocate the Array
+  while (i--) resArray[i] = [ownProps[i], obj[ownProps[i]]];
 
-const mergeResults = (...args) => (result, fn) => ({
-  ...result,
-  ...fn(...args),
-});
+  return resArray;
+};
+export default () => {
+  const staticArgs = {};
+  const dynamicArgs = {};
+  const middleware = ({ dispatch, getState }) => {
+    const extraArgument = { ...staticArgs };
+    entries(dynamicArgs).forEach(([key, callback]) => {
+      Object.defineProperty(extraArgument, key, {
+        get() {
+          return callback({ dispatch, getState });
+        },
+        enumerable: true,
+      });
+    });
 
-export default (...injectors: Array<Injector>) => ({
-  dispatch,
-  getState,
-}: MiddlewareAPI) => (next: Dispatch) => (action: any) => {
-  if (typeof action === 'function') {
-    const defaultProps = { dispatch, getState };
-    return action(injectors.reduce(mergeResults(defaultProps), defaultProps));
-  }
-  return next(action);
+    return next => action => {
+      if (typeof action === 'function') {
+        return action(dispatch, getState, extraArgument);
+      }
+      return next(action);
+    };
+  };
+  middleware.withStatic = arg => {
+    Object.assign(staticArgs, arg);
+    return middleware;
+  };
+  middleware.withDynamic = arg => {
+    Object.assign(dynamicArgs, arg);
+    return middleware;
+  };
+  return middleware;
 };

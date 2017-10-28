@@ -2,14 +2,23 @@
   "name": "redux-di",
   "version": "1.0.7",
   "description": "Redux thunk middleware with dependency injection",
-  "keywords": ["dependency injection", "di", "redux", "action creator", "laat"],
+  "keywords": [
+    "dependency injection",
+    "di",
+    "redux",
+    "action creator",
+    "laat"
+  ],
   "license": "MIT",
   "author": {
     "name": "Sigurd Fosseng",
     "email": "sigurd@fosseng.net",
     "url": "https://github.com/laat"
   },
-  "files": ["lib", "*.js"],
+  "files": [
+    "lib",
+    "*.js"
+  ],
   "main": "lib/index.js",
   "repository": "laat/redux-di",
   "scripts": {
@@ -23,7 +32,10 @@
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "*.{js,css}": ["prettier --write", "git add"]
+    "*.{js,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
